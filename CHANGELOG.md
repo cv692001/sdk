@@ -59,6 +59,13 @@ Updated the Linter to `0.1.120`, which includes:
 
 *   **Breaking Change** [#42982][]: `dart_api_dl.cc` is renamed to
     `dart_api_dl.c` and changed to a pure C file.
+*   **Breaking Change** [#42312][]: `Dart_WeakPersistentHandle`s will no longer
+    auto-delete themselves when the referenced object is garbage collected to
+    avoid race conditions, but they are still automatically deleted when the
+    isolate group shuts down.
+*   **Breaking Change** [#42312][]: `Dart_WeakPersistentHandleFinalizer`
+    is renamed to `Dart_HandleFinalizer` and had its `handle` argument removed.
+    All api functions using that type have been updated.
 *   Introduces `Dart_FinalizableHandle`s. They do auto-delete, and the weakly
     referred object cannot be accessed through them.
 
@@ -79,6 +86,7 @@ Updated the Linter to `0.1.120`, which includes:
 
 
 [#42982]: https://github.com/dart-lang/sdk/issues/42982
+[#42312]: https://github.com/dart-lang/sdk/issues/42312
 [unsoundness in the deferred loading algorithm]: https://github.com/dart-lang/sdk/blob/302ad7ab2cd2de936254850550aad128ae76bbb7/CHANGELOG.md#dart2js-3
 
 ### Tools
